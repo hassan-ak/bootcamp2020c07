@@ -1,0 +1,19 @@
+name: Deploy Bootcamp2020 Class07
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Installing Node
+      uses: actions/setup-node@v2-beta
+      with:
+        node-version: '12'
+    - name: Installing Surge
+      run: npm install --global surge
+    - name: Deploying Project to Surge
+      run: surge ./ http://hassanalikhan-bc2020c07.surge.sh/ --token ${{ secrets.SURGE_TOKEN }}
